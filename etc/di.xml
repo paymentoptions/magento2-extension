@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="PaymentoptionsFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Agtech\Paymentoptions\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Agtech\Paymentoptions\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Agtech\Paymentoptions\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">PaymentoptionsValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">PaymentoptionsValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">PaymentoptionsCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">PaymentoptionsConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">PaymentoptionsConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">Agtech\Paymentoptions\Model\Ui\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="country" xsi:type="string">PaymentoptionsCountryValidator</item>
+                <item name="currency" xsi:type="string">Agtech\Paymentoptions\Gateway\Validator\CurrencyValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsCountryValidator" type="Magento\Payment\Gateway\Validator\CountryValidator">
+        <arguments>
+            <argument name="config" xsi:type="object">PaymentoptionsConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PaymentoptionsCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="initialize" xsi:type="string">Agtech\Paymentoptions\Gateway\Command\InitializeCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
