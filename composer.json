@@ -1,0 +1,35 @@
+{
+    "name": "Agtech/Paymentoptions",
+    "description": "Magento2 module for Payment Options payment gateway",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Akshar Group Technologies",
+            "email": "hello@akshargrouptechnologies.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "magento/module-payment": "100.1.*",
+        "magento/module-checkout": "100.1.*",
+        "magento/module-sales": "100.1.*",
+        "agtech/module-core": "^1.12.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Agtech\\Paymentoptions\\": ""
+        }
+    }
+}
